@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title> </title>
-</head>
-<body>
-YOOOOOOOOO
-
-<!--     find a pokemon api -->
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Random Pokemon Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-center mb-4">Random Pokemon Page</h1>
+      <div class="card text-center">
+        <div class="card-body">
+          <h2 id="pokemon-name" class="card-title mb-4"><%= randomPokemon %></h2>
+          <img src="<%= pokemonImgUrl %>" alt="Pokemon image">
+          <button onclick="location.reload();" class="btn btn-primary mt-3">Reload</button>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/js/bootstrap.min.js"></script>
+  </body>
 </html>
