@@ -7,6 +7,11 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
+
+/*
+----------------------------Random search----------------------------------
+*/
+
 app.get('/', async (req, res) => {
   try {
     const randomPokemon = pokemon.random();
@@ -19,8 +24,8 @@ app.get('/', async (req, res) => {
     const strengths = [];
     const weaknesses = [];
 
-    for (const pokemonType of pokemonData.types) {
-      const typeResponse = await fetch(pokemonType.type.url);
+    for (const type of pokemonData.types) {
+      const typeResponse = await fetch(type.type.url);
       const typeData = await typeResponse.json();
 
       const doubleDamageTo = typeData.damage_relations.double_damage_to;
@@ -45,18 +50,23 @@ app.get('/', async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error fetching data from the Pokemon API');
   }
 });
+
+
+/*
+----------------------------Region-----------------------------------
+*/
 
 app.get('/search', (req, res) => {
   res.render('search');
 });
 
 app.post('/region', async (req, res) => {
-  const pokemonName = req.body.pokemonName;
-  const pokeApiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`;
   try {
+    const pokemonName = req.body.pokemonName;
+    const pokeApiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`;
+
     const pokeApiResponse = await fetch(pokeApiUrl);
     const pokemonData = await pokeApiResponse.json();
     const pokemonSpeciesUrl = pokemonData.species.url;
@@ -69,14 +79,86 @@ app.post('/region', async (req, res) => {
     res.render('region', { pokemonName, region });
   } catch (error) {
     console.error(error);
-    res.status(404).send('Pokemon not found');
   }
 });
+
+/*
+---------------------------Trivia------------------------------------
+*/
+
+app.get('/trivia', async (req, res) => {
+  try {
+    const pokeApiUrl = 'https://pokeapi.co/api/v2/pokemon/1'; // get the data for Bulbasaur
+    const pokeApiResponse = await fetch(pokeApiUrl);
+    const pokemonData = await pokeApiResponse.json();
+    const pokemonName = pokemonData.name;
+
+    res.render('trivia', { question: `Who is the very first Pokemon in the Pokemon Pokedex?` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching data from the Pokemon API');
+  }
+});
+
+app.post('/trivia', async (req, res) => {
+  const answer = req.body.answer.toLowerCase();
+  const pokeApiUrl = 'https://pokeapi.co/api/v2/pokemon/1'; // get the data for Bulbasaur
+  try {
+    const pokeApiResponse = await fetch(pokeApiUrl);
+    const pokemonData = await pokeApiResponse.json();
+    const correctAnswer = pokemonData.name.toLowerCase();
+
+    if (answer === correctAnswer) {
+      res.render('triviaResult', { image: 'happy_pokemon.jpg' });
+    } else {
+      res.render('triviaResult', { image: 'sad_pokemon.jpg' });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+
+/*
+----------------------------More trivia------------------------------
+*/
+
+app.get('/mewTrivia', async (req, res) => {
+  try {
+    const pokeApiUrl = 'https://pokeapi.co/api/v2/pokemon/151'; // get the data for Bulbasaur
+    const pokeApiResponse = await fetch(pokeApiUrl);
+    const pokemonData = await pokeApiResponse.json();
+    const pokemonName = pokemonData.name;
+
+    res.render('mewTrivia', { question: `What pokemon is 151 in the Pokemon Pokedex?` });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.post('/mewTrivia', async (req, res) => {
+  const answer = req.body.answer.toLowerCase();
+  const pokeApiUrl = 'https://pokeapi.co/api/v2/pokemon/151'; // get the data for Bulbasaur
+  try {
+    const pokeApiResponse = await fetch(pokeApiUrl);
+    const pokemonData = await pokeApiResponse.json();
+    const correctAnswer = pokemonData.name.toLowerCase();
+
+    if (answer === correctAnswer) {
+      res.render('mewTriviaResult', { image: 'happy_pokemon.jpg' });
+    } else {
+      res.render('mewTriviaResult', { image: 'sad_pokemon.jpg' });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+/*
+------------------Server started---------------------------
+*/
+
 
 app.listen(3000, () => {
   console.log('Server started');
 });
-
-// the plan:
-// generate a random poekmon
-// the next page shows its region (user types it in)
