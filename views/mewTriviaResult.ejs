@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Trivia Game Result</title>
+	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+<body id ="trivia">
+    <div class="wrapper">
+    <%- include('partials/nav.ejs') %>
+	<h1>Trivia Game Result</h1>
+	<% if (image === 'happy_pokemon.jpg') { %>
+		<img src="img/happy_pokemon.jpg" alt="Happy Pokemon">
+	<% } else { %>
+		<img src="img/sad_pokemon.jpg" alt="Sad Pokemon">
+	<% } %>
+	<p><% if (image === 'happy_pokemon.jpg') { %>Congratulations, you got it right!<% } else { %>Sorry, the correct answer is Mew.<% } %></p>
+	<a href="/trivia">Play Again</a>
+    </div>
+        <%- include('partials/footer.ejs') %>
+</body>
+</html>

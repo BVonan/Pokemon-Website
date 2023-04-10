@@ -1,0 +1,60 @@
+body {
+    text-align: center;
+  }
+  
+  #home {
+    background-image: url(https://cdn.dribbble.com/users/4342936/screenshots/16115013/pokedex-03_4x.jpg);
+    margin: 0 auto;
+  }
+  
+  #region {
+    background-image: url(https://www.pockettactics.com/wp-content/sites/pockettactics/2022/08/pokemon-regions-3.jpg);
+    background-position: center;
+      color: #ea456b;
+  }
+  
+  #trivia{
+      background-image: url(https://slidechef.net/wp-content/uploads/2022/10/Whos-That-Pokemon.jpg);
+      color: #fff;
+  }
+  
+  #rg {
+    color: #ea456b;
+    width: 45%;
+    margin: 0 auto;
+  }
+  
+  #nav {
+    text-align: center;
+  }
+  
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card {
+    margin-top: 30px;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  
+  
+  #footerTxt{
+      color:black;
+      right-margin:auto;
+      left-margin:auto;
+      border-radius: 15px;
+      margin: 0 auto;
+  
+  }
+  
+  
+  
