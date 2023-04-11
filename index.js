@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 ----------------------------Random search----------------------------------
 */
 
+
 app.get('/', async (req, res) => {
   try {
     const randomPokemon = pokemon.random();
